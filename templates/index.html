@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Résumé de Texte</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; max-width: 800px; margin: auto; }
+        textarea { width: 100%; height: 200px; margin-bottom: 10px; }
+        button { padding: 10px 20px; background-color: #4CAF50; color: white; border: none; cursor: pointer; }
+        button:hover { background-color: #45a049; }
+        .summary-box { margin-top: 20px; padding: 10px; border: 1px solid #ddd; }
+    </style>
+</head>
+<body>
+
+    <h1>Résumé de Texte</h1>
+
+    <form action="/summarize" method="POST">
+        <label for="text">Texte à résumer :</label><br>
+        <textarea name="text" id="text" placeholder="Collez votre texte ici..." required></textarea><br>
+
+        <label for="lang">Langue :</label>
+        <select name="lang" id="lang">
+            <option value="en">Anglais</option>
+            <option value="fr">Français</option>
+        </select><br><br>
+
+        <label for="num_sentences">Nombre de phrases dans le résumé :</label>
+        <input type="number" name="num_sentences" id="num_sentences" min="1" max="10" value="2"><br><br>
+
+        <button type="submit">Résumer</button>
+    </form>
+
+    {% if summary %}
+    <div class="summary-box">
+        <h2>Résumé Généré :</h2>
+        <p>{{ summary }}</p>
+    </div>
+    {% endif %}
+
+    {% if original %}
+    <div class="summary-box">
+        <h2>Texte Original :</h2>
+        <p>{{ original }}</p>
+    </div>
+    {% endif %}
+
+</body>
+</html>
